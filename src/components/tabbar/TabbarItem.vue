@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-bar-item" @click="itemClick">
+  <div :class="{is_active: is_active}" class="tab-bar-item" @click="itemClick">
     <slot name="item-icon"></slot>
     <slot name="item-text"></slot>
   </div>
@@ -10,6 +10,17 @@
     name: "TabbarItem",
     props:{
       path: String,
+    },
+    data(){
+      return {
+        // is_active: true
+
+      }
+    },
+    computed:{
+      is_active(){
+        return this.$route.path.indexOf(this.path) !== -1
+      }
     },
     methods: {
       itemClick(){
@@ -25,5 +36,9 @@
     flex: 1;
     text-align: center;
     height: 49px;
+    font-size: 14px;
+  }
+  .is_active{
+    color: deeppink;
   }
 </style>
